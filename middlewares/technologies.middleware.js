@@ -11,7 +11,7 @@ const remove = async (require, _response, next) => {
   if(validate.error) return next(validate.error);
 
   const technologyExists = await Tecnologias.findByPK(id);
-  if(!technologyExists) return next('notFound');
+  if(!technologyExists) return next({ details: 'notFound' });
 
   return next();
 };
@@ -33,7 +33,7 @@ const update = async (require, _response, next) => {
   if(validate.error) return next(validate.error);
 
   const technologyExists = await Tecnologias.findByPK(id);
-  if(!technologyExists) return next('notFound');
+  if(!technologyExists) return next({ details: 'notFound' });
 
   return next();
 };
