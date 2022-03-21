@@ -1,5 +1,5 @@
-const { Tecnologias } = require('../models');
-const { Tecnologias: TecnologiasValidação } = require('../models');
+const { Tecnologia } = require('../models');
+const { Tecnologias: TecnologiasValidação } = require('../validations');
 const { remove: removeValidation, create: createValidation, update: updateValidation } = TecnologiasValidação;
 
 const get = async (_require, _response, next) => next();
@@ -10,8 +10,8 @@ const remove = async (require, _response, next) => {
   const validate = await removeValidation.validate({ id });
   if(validate.error) return next(validate.error);
 
-  const technologyExists = await Tecnologias.findByPK(id);
-  if(!technologyExists) return next({ details: 'notFound' });
+  const technologyExists = await Tecnologia.findByPk(id);
+  if(!technologyExists) return next('notFound');
 
   return next();
 };
@@ -32,8 +32,8 @@ const update = async (require, _response, next) => {
   const validate = await updateValidation.validate({...body, id});
   if(validate.error) return next(validate.error);
 
-  const technologyExists = await Tecnologias.findByPK(id);
-  if(!technologyExists) return next({ details: 'notFound' });
+  const technologyExists = await Tecnologia.findByPk(id);
+  if(!technologyExists) return next('notFound');
 
   return next();
 };

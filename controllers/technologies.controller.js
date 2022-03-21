@@ -1,30 +1,30 @@
-const { Tecnologias } = require('../models');
+const { Tecnologia, TecnologiasProjeto } = require('../models');
 
 const get = async (_require, response, _next) => {
-  const technologies = await Tecnologias.findAll({ attributes: ['id', 'name', 'description', 'image'] });
-  return response.status(200).json({ technologies });
+  const technologies = await Tecnologia.findAll({ attributes: ['id', 'name', 'description', 'image'] });
+  return response.status(200).json(technologies);
 };
 
 const update = async (require, response, _next) => {
   const { id } = require.params;
   const { body } = require;
-  const technologies = await Tecnologias.update(body, { where: { id }});
-  return response.status(200).json(technologies);
+  await Tecnologia.update(body, { where: { id }});
+  return response.status(200).json({ id, ...body});
 };
 
-const create = async (require, response, _next) => {
+const create = async (require, response, next) => {
   const { name, image, description } = require.body;
-  const [technologies, created] = await Tecnologias.findOrCreate({
+  const [technologies, created] = await Tecnologia.findOrCreate({
     where: { name },
     defaults: { name, image, description },
   });
-  if(created) return next({ details: 'alreadyExists' });
+  if(!created) return next('alreadyExists');
   return response.status(201).json(technologies);
 };
 
 const remove = async (require, response, _next) => {
   const { id } = require.params;
-  await Tecnologias.destroy({ where: id });
+  await Promise.all([TecnologiasProjeto.destroy({ where: { tecnologia_id: id } }), Tecnologia.destroy({ where: { id } })]);
   return response.status(204).end();
 };
 
