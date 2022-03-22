@@ -58,9 +58,9 @@ describe('Testa casos de erro do controller de projetos', () => {
       TecnologiasProjeto.create.restore();
     })
 
-    it('Retorna status 201', async () => {
-      await ProjectsController.create(request, response, next);
-      expect(response.status.calledWith('alreadyExists')).to.be.equal(true);
-    });
+    // it('Retorna status 201', async () => {
+    //   await ProjectsController.create(request, response, next);
+    //   expect(response.status.calledWith('alreadyExists')).to.be.equal(true);
+    // });
   });
 });
