@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { Usuario } = require('../models');
 
 const jwtConfig = {
-  exp: 60 * 60,
+  expiresIn: 60 * 60 + 'h',
   algorithm: 'HS256',
 };
 
