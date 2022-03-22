@@ -4,15 +4,23 @@ const technologiesRouter = require('./routes/technologies.routes');
 const projectsRouter = require('./routes/projects.routes');
 const loginRouter = require('./routes/login.routes');
 const errorsMiddleware = require('./errors');
+const cors = require('cors');
+
+const corsOptions = {
+    origin: 'https://gabrielbenedicto.com/',
+    methods: 'GET, PUT, POST, DELETE',
+    optionsSuccessStatus: 200,
+};
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use('/login', cors(corsOptions), loginRouter);
-app.use('/technologies', cors(corsOptions), technologiesRouter);
-app.use('/projects', cors(corsOptions), projectsRouter);
+app.use('/login', loginRouter);
+app.use('/technologies', technologiesRouter);
+app.use('/projects', projectsRouter);
 
 app.use(errorsMiddleware);
 
