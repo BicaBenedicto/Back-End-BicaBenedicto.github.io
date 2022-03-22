@@ -18,7 +18,7 @@ const create = async (require, response, next) => {
     where: { name },
     defaults: { name, image, description },
   });
-  if(!created) return next('alreadyExists');
+  if(created) return next('alreadyExists');
   return response.status(201).json(technologies);
 };
 
