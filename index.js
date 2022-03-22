@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const corsOptions = {
     origin: '*',
+    methods: 'GET, PUT, POST, DELETE',
     optionsSuccessStatus: 200,
 };
 
