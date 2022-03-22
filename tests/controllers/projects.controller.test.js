@@ -1,28 +1,125 @@
+const { expect } = require('chai');
+const sinon = require('sinon');
 const ProjectsController = require('../../controllers/projects.controller');
-const SequelizeMock = require('sequelize-mock');
+const { Projeto, Tecnologia, TecnologiasProjeto} = require('../../models');
+const Mocks = require('../mocks');
 
 describe('Testa requisições do controller de projetos', () => {
-  describe('Verifica rota get, se retorna o esperado', () => {
+  describe('Verifica se rota get retorna o esperado', () => {
     const response = {};
     const request = {};
     let next;
 
     before(async () => {
-      const DBConnectionMock = new SequelizeMock();
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      response.end = sinon.stub().returns();
 
-      ProjetoMock = DBConnectionMock.define('Projeto', {
-        name: 'Pixel Art',
-        description: 'O projeto é um site de desenho, com algumas paletas de cores aleatórias que são geradas, podendo adicionar, remover ou alterar a cor das paletas conforme desejar, o quadro inicial é de 5 por 5, podendo chegar até 50 por 50 para fazer desenhos em pixel art da maneira que preferir.',
-        site: '/projects/pixel-art/',
-        rep: 'https://github.com/BicaBenedicto/pixel-art',
-        image: 'https://sveumdxbnahjywvugrjp.supabase.in/storage/v1/object/sign/portfolio-images/projects/pixels-art.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwb3J0Zm9saW8taW1hZ2VzL3Byb2plY3RzL3BpeGVscy1hcnQucG5nIiwiaWF0IjoxNjQ3NzM4MzE3LCJleHAiOjE5NjMwOTgzMTd9.U-mcT5i9ZIYMTHkMUcWfAL8KYjUF8mM5-O9ZMC4KMF8',
-      });
+      sinon.stub(Projeto, 'findAll').resolves(Mocks.projetos.get);
+      sinon.stub(Tecnologia, 'findOne').resolves(Mocks.tecnologias.get[0].dataValues);
+      sinon.stub(TecnologiasProjeto, 'findAll').resolves(Mocks.tecnologiasProjetos.get);
     });
 
-    it('Verifica que rota retorna o esperado', async () => {
-      const teste = await ProjectsController.get(request, response, next);
-      console.log(teste);
+    after(async () => {
+      Tecnologia.findOne.restore();
+      Projeto.findAll.restore();
+      TecnologiasProjeto.findAll.restore();
+    })
+
+    it('Retorna status 200', async () => {
+      await ProjectsController.get(request, response, next);
+      expect(response.status.calledWith(200)).to.be.equal(true);
     });
   });
 
+  describe('Verifica se rota put retorna o esperado', () => {
+    const response = {};
+    const request = {};
+    let next;
+
+    before(async () => {
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      response.end = sinon.stub().returns();
+
+      request.params = Mocks.projetos.update.params;
+      request.body = Mocks.projetos.update.body;
+
+      sinon.stub(Projeto, 'update').resolves(Mocks.projetos.update.response);
+      sinon.stub(Tecnologia, 'findOne').resolves(Mocks.tecnologias.get[0]);
+      sinon.stub(TecnologiasProjeto, 'findAll').resolves(Mocks.tecnologiasProjetos.get);
+
+    });
+
+    after(async () => {
+      Tecnologia.findOne.restore();
+      Projeto.update.restore();
+      TecnologiasProjeto.findAll.restore();
+    })
+
+    it('Retorna status 200', async () => {
+      await ProjectsController.update(request, response, next);
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    });
+  });
+
+  describe('Verifica se rota post retorna o esperado', () => {
+    const response = {};
+    const request = {};
+    let next;
+
+    before(async () => {
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      response.end = sinon.stub().returns();
+
+      request.body = Mocks.projetos.create.body;
+
+      sinon.stub(Projeto, 'findOrCreate').resolves([Mocks.projetos.create.response]);
+      sinon.stub(Tecnologia, 'findOne').resolves(Mocks.tecnologias.get[0]);
+      sinon.stub(TecnologiasProjeto, 'create').resolves(Mocks.tecnologiasProjetos.get);
+
+    });
+
+    after(async () => {
+      Tecnologia.findOne.restore();
+      Projeto.findOrCreate.restore();
+      TecnologiasProjeto.create.restore();
+    })
+
+    it('Retorna status 201', async () => {
+      await ProjectsController.create(request, response, next);
+      expect(response.status.calledWith(201)).to.be.equal(true);
+    });
+  });
+
+  describe('Verifica se rota delete retorna o esperado', () => {
+    const response = {};
+    const request = {};
+    let next;
+
+    before(async () => {
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      response.end = sinon.stub().returns();
+
+      request.params = Mocks.projetos.remove.params;
+
+      sinon.stub(Projeto, 'destroy').resolves([Mocks.projetos.create.response]);
+      sinon.stub(Tecnologia, 'findOne').resolves(Mocks.tecnologias.get[0]);
+      sinon.stub(TecnologiasProjeto, 'destroy').resolves(Mocks.tecnologiasProjetos.get);
+
+    });
+
+    after(async () => {
+      Tecnologia.findOne.restore();
+      Projeto.destroy.restore();
+      TecnologiasProjeto.destroy.restore();
+    })
+
+    it('Retorna status 204', async () => {
+      await ProjectsController.remove(request, response, next);
+      expect(response.status.calledWith(204)).to.be.equal(true);
+    });
+  });
 });
