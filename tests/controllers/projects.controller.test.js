@@ -48,6 +48,8 @@ describe('Testa requisições do controller de projetos', () => {
       sinon.stub(Projeto, 'update').resolves(Mocks.projetos.update.response);
       sinon.stub(Tecnologia, 'findOne').resolves(Mocks.tecnologias.get[0]);
       sinon.stub(TecnologiasProjeto, 'findAll').resolves(Mocks.tecnologiasProjetos.get);
+      sinon.stub(TecnologiasProjeto, 'destroy').resolves();
+      sinon.stub(TecnologiasProjeto, 'create').resolves(Mocks.tecnologiasProjetos.get);
 
     });
 
@@ -55,9 +57,16 @@ describe('Testa requisições do controller de projetos', () => {
       Tecnologia.findOne.restore();
       Projeto.update.restore();
       TecnologiasProjeto.findAll.restore();
+      TecnologiasProjeto.destroy.restore();
+      TecnologiasProjeto.create.restore();
     })
 
-    it('Retorna status 200', async () => {
+    it('Retorna status 200 sem tecnologias', async () => {
+      await ProjectsController.update(request, response, next);
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    });
+    it('Retorna status 200 com tecnologias', async () => {
+      request.body = Mocks.projetos.update.body_2;
       await ProjectsController.update(request, response, next);
       expect(response.status.calledWith(200)).to.be.equal(true);
     });

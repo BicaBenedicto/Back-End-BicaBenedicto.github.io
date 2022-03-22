@@ -23,7 +23,7 @@ const update = async (require, response, _next) => {
     await TecnologiasProjeto.destroy({ where: { projeto_id: id }});
     const getTechnologies = await Promise.all(body.technologies.map(async (name) => Tecnologia.findOne({ where: { name }, attributes: ['id', 'name', 'image', 'description'] })));
     await Promise.all(getTechnologies.map(async ({ dataValues }) => TecnologiasProjeto.create({ projeto_id: id, tecnologia_id: dataValues.id })));
-    return response.status(201).json({ id, ...body, technologies: getTechnologies});
+    return response.status(200).json({ id, ...body, technologies: getTechnologies});
   }
   const technologiesConnection = await TecnologiasProjeto.findAll({ where: { projeto_id: id }});
   const technologies = await Promise.all(technologiesConnection.map(async ({ dataValues }) => Tecnologia.findOne({ where: { id: dataValues.tecnologia_id }, attributes: ['id', 'name', 'image', 'description'] })));

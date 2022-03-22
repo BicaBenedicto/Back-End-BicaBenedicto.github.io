@@ -30,6 +30,14 @@ const update = {
     rep: 'https://github.com/BicaBenedicto/teste',
     image: 'https://sveumdxbnahjywvugrjp.supabase.in/storage/v1/object/sign/portfolio-images/projects/trybewallet.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwb3J0Zm9saW8taW1hZ2VzL3Byb2plY3RzL3RyeWJld2FsbGV0LnBuZyIsImlhdCI6MTY0NzczODM3NiwiZXhwIjoxOTYzMDk4Mzc2fQ.Pwi1Ys6ZNZxrDgOHbuRAS1UwQMI9GH_NzHFja6oVPDQ',
   },
+  body_2: {
+    name: 'Teste',
+    description: 'O projeto é um site, utilizando uma API que informa os valores do cambio para Real, sendo possível anotar os gastos em diversas moedas, e o valor é convertido para Real Brasileiro, ficando salvo em seu navegador e utilizando o cambio no momento atual que realizou a adição.',
+    site: '',
+    rep: 'https://github.com/BicaBenedicto/teste',
+    image: 'https://sveumdxbnahjywvugrjp.supabase.in/storage/v1/object/sign/portfolio-images/projects/trybewallet.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwb3J0Zm9saW8taW1hZ2VzL3Byb2plY3RzL3RyeWJld2FsbGV0LnBuZyIsImlhdCI6MTY0NzczODM3NiwiZXhwIjoxOTYzMDk4Mzc2fQ.Pwi1Ys6ZNZxrDgOHbuRAS1UwQMI9GH_NzHFja6oVPDQ',
+    technologies: ['Git'],
+  },
   response: {
     id: 2,
     name: 'Teste',
