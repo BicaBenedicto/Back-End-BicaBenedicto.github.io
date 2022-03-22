@@ -38,7 +38,7 @@ const create = async (require, response, next) => {
     where: { name },
     defaults: { name, image, description, rep, site },
   });
-  if(created) return next('alreadyExists');
+  if(!created) return next('alreadyExists');
 
   const getTechnologies = await Promise.all(technologies.map(async (name) => Tecnologia.findOne({ where: { name }, attributes: ['id', 'name', 'image', 'description'] })));
   await Promise.all(getTechnologies.map(async ({ dataValues }) => TecnologiasProjeto.create({ projeto_id: project.id, tecnologia_id: dataValues.id })));
