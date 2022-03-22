@@ -4,7 +4,8 @@ const get = async (_require, response, _next) => {
   const projects = await Projeto.findAll({ attributes: ['id', 'name', 'description', 'image', 'site', 'rep'] });
   const getProjects = await Promise.all(projects.map(async ({ dataValues: project}) => {
     const technologiesConnection = await TecnologiasProjeto.findAll({ where: { projeto_id: project.id }, attributes: ['projeto_id', 'tecnologia_id']});
-    const technologies = await Promise.all(technologiesConnection.map(async ({ dataValues }) => Tecnologia.findOne({ where: { id: dataValues.tecnologia_id }, attributes: ['id', 'name', 'image', 'description']})));
+    const getTechnologies = await Promise.all(technologiesConnection.map(async ({ dataValues }) => Tecnologia.findOne({ where: { id: dataValues.tecnologia_id }, attributes: ['id', 'name', 'image', 'description']})));
+    const technologies = getTechnologies.filter((value) => value);
     return {
       ...project,
       technologies
