@@ -7,7 +7,7 @@ const get = async (_require, _response, next) => next();
 const remove = async (require, _response, next) => {
   const { id } = require.params;
 
-  const token = request.headers.authorization;
+  const token = require.headers.authorization;
   if (!token) return next('tokenEmpty');
 
   const validateToken = await TOKEN(token);
@@ -26,7 +26,7 @@ const remove = async (require, _response, next) => {
 const create = async (require, _response, next) => {
   const { body } = require;
 
-  const token = request.headers.authorization;
+  const token = require.headers.authorization;
   if (!token) return next('tokenEmpty');
 
   const validateToken = await TOKEN(token);
@@ -43,7 +43,7 @@ const update = async (require, _response, next) => {
   const { body } = require;
   const { id } = require.params;
 
-  const token = request.headers.authorization;
+  const token = require.headers.authorization;
   if (!token) return next('tokenEmpty');
 
   const validateToken = await TOKEN(token);
