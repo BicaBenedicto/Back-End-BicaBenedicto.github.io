@@ -12,6 +12,7 @@
   "author": "Gabriel Pereira Benedicto",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "joi": "^17.6.0",
