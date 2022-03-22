@@ -17,9 +17,9 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use('/login', loginRouter);
-app.use('/technologies', technologiesRouter);
-app.use('/projects', projectsRouter);
+app.use('/login', cors(corsOptions), loginRouter);
+app.use('/technologies', cors(corsOptions), technologiesRouter);
+app.use('/projects', cors(corsOptions), projectsRouter);
 
 app.use(errorsMiddleware);
 
