@@ -49,11 +49,17 @@ Instale BicaBenedicto/Back-End-BicaBenedicto.github.io com npm
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
 
 `PASSWORD_POSTGRES=SENHA DO POSTGRES DO BANCO DE DADOS`
+
 `HOST=LINK DO BANCO DE DADOS EM POSTGRES`
+
 `DATABASE=postgres`
+
 `DB_USERNAME=postgres`
+
 `DB_PORT=PORTA DO BANCO DE DADOS EM POSTGRES`
+
 `JWT_SECRET=CHAVE PARA CRYPTOGRAFAR JWT`
+
 ## Rodando localmente
 
 
