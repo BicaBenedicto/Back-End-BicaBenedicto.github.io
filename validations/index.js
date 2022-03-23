@@ -1,4 +1,7 @@
+require('dotenv').config();
+
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
 const Tecnologias = {
   update: Joi.object({
