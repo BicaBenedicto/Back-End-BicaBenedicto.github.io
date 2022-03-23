@@ -6,7 +6,7 @@ Aplicação back-end, estruturada com Node.js, Express.js, Json Web Tokens, Sequ
 
 ## Stack utilizada
 
-**Back-end:** Node.js, Express.js, Sequelize.js, Json Web Tokens
+**Back-end:** Node.js, Express.js, Sequelize.js, Json Web Tokens, Joi
 
 **DevOps:** Docker, Heroku
 
