@@ -37,11 +37,11 @@ O mesmo possuindo "conta" registrada no banco de dados, consegue logar utilizand
 
 ## Instalação
 
-Instale BicaBenedicto/Back-End-BicaBenedicto.github.io com npm
+Instale Portfolio-Backend com npm
 
 ```bash
-  npm install BicaBenedicto/Back-End-BicaBenedicto.github.io
-  cd BicaBenedicto/Back-End-BicaBenedicto.github.io
+  npm install Portfolio-Backend
+  cd Portfolio-Backend
 ```
 
 ## Variáveis de Ambiente
