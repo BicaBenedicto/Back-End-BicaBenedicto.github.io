@@ -8,11 +8,13 @@ const Tecnologias = {
     id: Joi.number().required(),
     name: Joi.string().min(2),
     description: Joi.string().min(6),
+    description_en: Joi.string().min(6),
     image: Joi.string(),
   }),
   create: Joi.object({
     name: Joi.string().min(2).required(),
     description: Joi.string().min(6).required(),
+    description_en: Joi.string().min(6),
     image: Joi.string().required(),
   }),
   remove: Joi.object({
@@ -24,18 +26,24 @@ const Projetos = {
   update: Joi.object({
     id: Joi.number().required(),
     name: Joi.string().min(2),
+    name_en: Joi.string().min(2),
     description: Joi.string().min(6),
+    description_en: Joi.string().min(6),
     image: Joi.string(),
     site: Joi.string().allow(null).allow(''),
     rep: Joi.string().allow(null).allow(''),
+    favorited: Joi.bool(),
     technologies: Joi.array().items(Joi.string()),
   }),
   create: Joi.object({
     name: Joi.string().min(2).required(),
+    name_en: Joi.string().min(2),
     description: Joi.string().min(6).required(),
+    description_en: Joi.string().min(6),
     image: Joi.string().required(),
     site: Joi.string().allow(null).allow(''),
     rep: Joi.string().allow(null).allow(''),
+    favorited: Joi.bool(),
     technologies: Joi.array().items(Joi.string()).required(),
   }),
   remove: Joi.object({
