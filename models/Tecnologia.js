@@ -7,6 +7,7 @@ const Tecnologia = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
     description: DataTypes.STRING(500),
+    description_en: DataTypes.STRING(500),
     image: DataTypes.STRING(500)
   }, { tableName: 'Tecnologias' });
 

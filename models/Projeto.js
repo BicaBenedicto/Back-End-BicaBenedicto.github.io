@@ -6,9 +6,12 @@ const Projeto = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     name: DataTypes.STRING,
+    name_en: DataTypes.STRING,
     description: DataTypes.STRING(500),
+    description_en: DataTypes.STRING(500),
     site: DataTypes.STRING,
     rep: DataTypes.STRING,
+    favorited: DataTypes.BOOLEAN,
     image: DataTypes.STRING(500)
   }, { tableName: 'Projetos' });
 
