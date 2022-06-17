@@ -1,6 +1,6 @@
 const { LOGIN } = require('../validations');
 
-const acess = (request, _response, next) => {
+const access = (request, _response, next) => {
   const { body } = request;
   const validate = LOGIN.validate(body);
   if (validate.error) return next(validate.error);
@@ -9,5 +9,5 @@ const acess = (request, _response, next) => {
 };
 
 module.exports = {
-  acess,
+  access,
 };
