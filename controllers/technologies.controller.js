@@ -1,7 +1,9 @@
 const { Tecnologia, TecnologiasProjeto } = require('../models');
 
 const get = async (_require, response, _next) => {
-  const technologies = await Tecnologia.findAll({ attributes: ['id', 'name', 'description', 'image'] });
+  const technologies = await Tecnologia.findAll({
+    attributes: ['id', 'name', 'description', 'description_en', 'image'],
+  });
   return response.status(200).json(technologies);
 };
 
