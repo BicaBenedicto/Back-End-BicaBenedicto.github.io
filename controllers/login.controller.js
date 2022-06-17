@@ -8,7 +8,7 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const acess = async (request, response, next) => {
+const access = async (request, response, next) => {
   const { body: user } = request;
 
   const newUser = await Usuario.findOne({ where: { email: user.email, password: user.password } });
@@ -19,5 +19,5 @@ const acess = async (request, response, next) => {
 };
 
 module.exports = {
-  acess,
+  access,
 };

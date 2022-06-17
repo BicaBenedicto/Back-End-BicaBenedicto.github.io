@@ -4,6 +4,6 @@ const loginController = require('../controllers/login.controller');
 
 const router = express();
 
-router.post('/', loginMiddleware.acess, loginController.acess);
+router.post('/', loginMiddleware.access, loginController.access);
 
 module.exports = router;
