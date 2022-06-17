@@ -3,6 +3,10 @@ const TYPES = {
     code: 404,
     message: 'Not Found',
   },
+  passwordInvalid: {
+    code: 400,
+    message: 'Password invalid',
+  },
   tokenEmpty: {
     code: 401,
     message: 'Token not found',
@@ -26,7 +30,6 @@ const handdleGenericErrors = (error, _request, response, _next) => {
     const [details] = error.details;
     return response.status(400).json({ message: details.message });
   }
-  console.log(error);
   return response.status(500).json({ message: 'Interval error' });
 };
 

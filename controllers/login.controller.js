@@ -1,5 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const { compare } = require('bcryptjs');
 
 const { Usuario } = require('../models');
 
@@ -9,12 +10,18 @@ const jwtConfig = {
 };
 
 const access = async (request, response, next) => {
-  const { body: user } = request;
+  const { body } = request;
 
-  const newUser = await Usuario.findOne({ where: { email: user.email, password: user.password } });
+  const user = await jwt.decode(body, process.env.JWT_LOGIN);
+
+  const newUser = await Usuario.findOne({ where: { email: user.email } });
   if (!newUser) return next('notFound');
+  
+  const passwordCompare = await compare(user.password, newUser.password);
 
-  const token = jwt.sign({ data: newUser }, process.env.JWT_SECRET, jwtConfig);
+  if(!passwordCompare) return next('passwordInvalid');
+
+  const token = jwt.sign({ data: { id: newUser.id, email: newUser.email } }, process.env.JWT_SECRET, jwtConfig);
   return response.status(200).json({ token });
 };
 
