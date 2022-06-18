@@ -11,11 +11,11 @@ const jwtConfig = {
 
 const access = async (request, response, next) => {
   try {
-    const { body } = request;
+    const { body: user } = request;
 
     // const user = await jwt.decode(body, process.env.JWT_LOGIN);
 
-    const user = body;
+    // const user = body;
 
     const newUser = await Usuario.findOne({ where: { email: user.email } });
     if (!newUser) return next('notFound');
