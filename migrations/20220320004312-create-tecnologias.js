@@ -15,11 +15,11 @@ module.exports = {
       },
       description: {
         allowNull: true,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       image: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       createdAt: {
         allowNull: false,
