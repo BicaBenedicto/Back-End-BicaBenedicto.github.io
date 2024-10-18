@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const view = async (request, response, next) => {
   const filename = request.params.filename;
-  const folder = request.query.folder;
+  const folder = request.params.folder;
   const filePath = path.join(__dirname, `/../assets/${folder}/`, filename);
 
   if (fs.existsSync(filePath)) {
